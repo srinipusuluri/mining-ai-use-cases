@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Mining - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #f59e0b;
+            --secondary-color: #ef4444;
+            --accent-color: #10b981;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --mining-gold: #f59e0b;
+            --safety-red: #ef4444;
+            --ore-blue: #3b82f6;
+            --earth-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--mining-gold), var(--safety-red), var(--ore-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--mining-gold), var(--ore-blue));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--mining-gold), var(--ore-blue), var(--safety-red));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(245, 158, 11, 0.2); color: var(--mining-gold); }
+        .icon.gen { background: rgba(239, 68, 68, 0.2); color: var(--safety-red); }
+        .icon.ag { background: rgba(59, 130, 246, 0.2); color: var(--ore-blue); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--mining-gold), var(--ore-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--mining-gold);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--mining-gold);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--mining-gold);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .mining-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .safety-badge {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .ore-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⛏ AI in Mining</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Mineral Extraction, Resource Management, and Operational Safety</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for mineral exploration, production optimization, and operational safety in mining operations
+            </p>
+
+            <div class="card-grid">
+                <!-- Ore Grade Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">💎</div>
+                        <div>
+                            <div class="card-title">Ore Grade Prediction</div>
+                            <div class="card-subtitle">Mineral Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict ore grade and mineral content in different mining areas to optimize extraction strategies and resource allocation.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Geological Analysis</span>
+                            <span class="tech-tag">Mineral Prediction</span>
+                            <span class="tech-tag">Resource Estimation</span>
+                            <span class="tech-tag">Exploration Data</span>
+                            <span class="tech-tag">Grade Modeling</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Geological Data → Mineral Analysis → Grade Prediction → Resource Estimation → Extraction Planning → Optimization</div>
+                            <div class="architecture-item">Exploration Data → Core Sampling → Grade Analysis → Prediction → Mining Strategy → Efficiency</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Geological survey data</li>
+                                <li>Core sample analysis</li>
+                                <li>Mineral composition data</li>
+                                <li>Historical extraction data</li>
+                                <li>Geophysical measurements</li>
+                                <li>Remote sensing data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Grade Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Extraction Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Resource Recovery</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipment Failure Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🔧</div>
+                        <div>
+                            <div class="card-title">Equipment Failure</div>
+                            <div class="card-subtitle">Predictive Maintenance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict equipment failures in mining machinery to prevent downtime and optimize maintenance schedules in harsh mining environments.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Predictive Maintenance</span>
+                            <span class="tech-tag">Equipment Monitoring</span>
+                            <span class="tech-tag">Failure Prediction</span>
+                            <span class="tech-tag">Mining Machinery</span>
+                            <span class="tech-tag">Operational Efficiency</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Equipment Sensors → Usage Monitoring → Condition Analysis → Failure Prediction → Maintenance Scheduling → Optimization</div>
+                            <div class="architecture-item">Machine Data → Performance Tracking → Failure Analysis → Maintenance Planning → Execution → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Equipment sensor data</li>
+                                <li>Operating conditions</li>
+                                <li>Maintenance history</li>
+                                <li>Failure patterns</li>
+                                <li>Environmental conditions</li>
+                                <li>Usage intensity data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Failure Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Downtime Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Maintenance Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production Optimization Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🏭</div>
+                        <div>
+                            <div class="card-title">Production Optimization</div>
+                            <div class="card-subtitle">Mining Efficiency</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize mining production processes by analyzing extraction rates, processing efficiency, and resource utilization.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Production Analysis</span>
+                            <span class="tech-tag">Process Optimization</span>
+                            <span class="tech-tag">Resource Utilization</span>
+                            <span class="tech-tag">Efficiency Modeling</span>
+                            <span class="tech-tag">Mining Operations</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Production Data → Process Analysis → Optimization → Resource Allocation → Efficiency → Monitoring</div>
+                            <div class="architecture-item">Mining Operations → Processing Data → Optimization → Resource Management → Production → Analysis</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Production rate data</li>
+                                <li>Processing efficiency metrics</li>
+                                <li>Resource utilization rates</li>
+                                <li>Equipment performance data</li>
+                                <li>Operational parameters</li>
+                                <li>Quality control data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Production Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Resource Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Cost Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geological Pattern Detection -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🗺️</div>
+                        <div>
+                            <div class="card-title">Geological Patterns</div>
+                            <div class="card-subtitle">Exploration Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Detect geological patterns and mineral deposits using geophysical data analysis and remote sensing technologies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Geological Analysis</span>
+                            <span class="tech-tag">Pattern Recognition</span>
+                            <span class="tech-tag">Mineral Detection</span>
+                            <span class="tech-tag">Remote Sensing</span>
+                            <span class="tech-tag">Exploration Technology</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Geophysical Data → Pattern Analysis → Mineral Detection → Deposit Mapping → Exploration → Validation</div>
+                            <div class="architecture-item">Remote Sensing → Geological Analysis → Pattern Recognition → Resource Mapping → Exploration → Discovery</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Geophysical survey data</li>
+                                <li>Remote sensing imagery</li>
+                                <li>Geological maps</li>
+                                <li>Mineral occurrence data</li>
+                                <li>Historical exploration data</li>
+                                <li>Environmental conditions</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Pattern Detection</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Exploration Success</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Discovery Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Risk Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Safety Risk Modeling</div>
+                            <div class="card-subtitle">Hazard Prevention</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Model and predict safety risks in mining operations including structural instability, gas accumulation, and equipment hazards.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Safety Analysis</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Hazard Detection</span>
+                            <span class="tech-tag">Structural Monitoring</span>
+                            <span class="tech-tag">Environmental Safety</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Environmental Data → Risk Analysis → Hazard Detection → Safety Modeling → Prevention → Monitoring</div>
+                            <div class="architecture-item">Mining Conditions → Safety Assessment → Risk Modeling → Prevention → Safety Protocols → Implementation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Structural integrity data</li>
+                                <li>Gas concentration levels</li>
+                                <li>Environmental monitoring</li>
+                                <li>Safety incident history</li>
+                                <li>Equipment safety data</li>
+                                <li>Worker safety records</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Risk Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Safety Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Accident Prevention</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commodity Price Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">💰</div>
+                        <div>
+                            <div class="card-title">Commodity Price</div>
+                            <div class="card-subtitle">Market Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Forecast commodity prices for mined materials to optimize production planning and market timing strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Price Forecasting</span>
+                            <span class="tech-tag">Market Analysis</span>
+                            <span class="tech-tag">Commodity Trading</span>
+                            <span class="tech-tag">Economic Modeling</span>
+                            <span class="tech-tag">Production Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Market Data → Price Analysis → Trend Forecasting → Production Planning → Market Timing → Optimization</div>
+                            <div class="architecture-item">Commodity Prices → Market Trends → Forecasting → Production Strategy → Sales Planning → Profitability</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical commodity prices</li>
+                                <li>Market demand data</li>
+                                <li>Global economic indicators</li>
+                                <li>Supply chain data</li>
+                                <li>Production costs</li>
+                                <li>Market trends</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-85%</div>
+                                <div class="metric-label">Price Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Market Timing</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Profit Optimization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, documentation, and reporting for mining operations, exploration, safety compliance, and stakeholder communication
+            </p>
+
+            <div class="card-grid">
+                <!-- Exploration Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🗺️</div>
+                        <div>
+                            <div class="card-title">Exploration Reports</div>
+                            <div class="card-subtitle">Geological Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive geological exploration reports with mineral analysis, resource estimates, and extraction recommendations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Geological Reporting</span>
+                            <span class="tech-tag">Mineral Analysis</span>
+                            <span class="tech-tag">Resource Estimation</span>
+                            <span class="tech-tag">Exploration Documentation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Exploration Data → Geological Analysis → Resource Estimation → Report Generation → Review → Recommendations</div>
+                            <div class="architecture-item">Survey Data → Analysis → Interpretation → Reporting → Validation → Planning</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Geological survey data</li>
+                                <li>Mineral composition analysis</li>
+                                <li>Resource estimation data</li>
+                                <li>Exploration findings</li>
+                                <li>Technical specifications</li>
+                                <li>Environmental considerations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Analysis Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environmental Impact Documentation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🌍</div>
+                        <div>
+                            <div class="card-title">Environmental Impact</div>
+                            <div class="card-subtitle">Compliance Reporting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive environmental impact assessments and compliance documentation for mining operations and regulatory requirements.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Environmental Assessment</span>
+                            <span class="tech-tag">Compliance Documentation</span>
+                            <span class="tech-tag">Regulatory Reporting</span>
+                            <span class="tech-tag">Impact Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Environmental Data → Impact Analysis → Assessment → Documentation → Compliance → Reporting</div>
+                            <div class="architecture-item">Site Analysis → Environmental Monitoring → Impact Assessment → Documentation → Regulatory → Approval</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Environmental monitoring data</li>
+                                <li>Impact assessment criteria</li>
+                                <li>Regulatory requirements</li>
+                                <li>Site-specific conditions</li>
+                                <li>Mitigation measures</li>
+                                <li>Compliance standards</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Documentation Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Documentation Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Compliance Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">⚠️</div>
+                        <div>
+                            <div class="card-title">Safety Compliance</div>
+                            <div class="card-subtitle">Safety Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate detailed safety compliance reports documenting mining safety procedures, hazard assessments, and regulatory compliance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Safety Reporting</span>
+                            <span class="tech-tag">Compliance Documentation</span>
+                            <span class="tech-tag">Hazard Assessment</span>
+                            <span class="tech-tag">Regulatory Compliance</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Safety Data → Compliance Analysis → Report Generation → Review → Approval → Implementation</div>
+                            <div class="architecture-item">Safety Procedures → Compliance Check → Documentation → Review → Approval → Training</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Safety inspection data</li>
+                                <li>Compliance requirements</li>
+                                <li>Hazard assessment data</li>
+                                <li>Safety procedure documentation</li>
+                                <li>Regulatory standards</li>
+                                <li>Incident reports</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 minutes</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operational Manuals -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📖</div>
+                        <div>
+                            <div class="card-title">Operational Manuals</div>
+                            <div class="card-subtitle">Training Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Create comprehensive operational manuals and training materials for mining equipment operation, safety procedures, and best practices.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Operational Documentation</span>
+                            <span class="tech-tag">Training Materials</span>
+                            <span class="tech-tag">Equipment Procedures</span>
+                            <span class="tech-tag">Safety Protocols</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Operational Requirements → Manual Creation → Training Content → Review → Distribution → Training</div>
+                            <div class="architecture-item">Equipment Specs → Safety Procedures → Manual Writing → Review → Implementation → Training</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Equipment specifications</li>
+                                <li>Safety requirements</li>
+                                <li>Operational procedures</li>
+                                <li>Training standards</li>
+                                <li>Best practices</li>
+                                <li>Regulatory compliance</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Manual Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Training Effectiveness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Manual Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sustainability Reporting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">♻️</div>
+                        <div>
+                            <div class="card-title">Sustainability Reporting</div>
+                            <div class="card-subtitle">Environmental Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive sustainability reports documenting environmental impact, resource conservation, and sustainable mining practices.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Sustainability Reporting</span>
+                            <span class="tech-tag">Environmental Documentation</span>
+                            <span class="tech-tag">Resource Conservation</span>
+                            <span class="tech-tag">Sustainable Practices</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Environmental Data → Sustainability Analysis → Report Generation → Review → Publication → Monitoring</div>
+                            <div class="architecture-item">Resource Usage → Impact Assessment → Sustainability Metrics → Reporting → Review → Improvement</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Environmental impact data</li>
+                                <li>Resource usage metrics</li>
+                                <li>Sustainability indicators</li>
+                                <li>Conservation measures</li>
+                                <li>Regulatory requirements</li>
+                                <li>Stakeholder expectations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Sustainability Metrics</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Investor Briefings -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">💼</div>
+                        <div>
+                            <div class="card-title">Investor Briefings</div>
+                            <div class="card-subtitle">Financial Reporting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate investor briefings and financial reports with production data, market analysis, and investment opportunities in mining operations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Investor Reporting</span>
+                            <span class="tech-tag">Financial Analysis</span>
+                            <span class="tech-tag">Market Analysis</span>
+                            <span class="tech-tag">Investment Documentation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Financial Data → Market Analysis → Investment Review → Briefing Generation → Review → Presentation</div>
+                            <div class="architecture-item">Production Data → Financial Analysis → Market Trends → Investor Briefing → Review → Distribution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Financial performance data</li>
+                                <li>Production metrics</li>
+                                <li>Market analysis</li>
+                                <li>Investment opportunities</li>
+                                <li>Risk assessments</li>
+                                <li>Strategic plans</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Briefing Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Investor Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 minutes</div>
+                                <div class="metric-label">Briefing Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex mining operations and resource management workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Autonomous Drilling Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⛏️</div>
+                        <div>
+                            <div class="card-title">Autonomous Drilling</div>
+                            <div class="card-subtitle">Mining Automation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate drilling operations using AI agents that can optimize drilling parameters, detect ore quality, and adjust operations in real-time.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Autonomous Drilling</span>
+                            <span class="tech-tag">Mining Automation</span>
+                            <span class="tech-tag">Real-time Optimization</span>
+                            <span class="tech-tag">Ore Detection</span>
+                            <span class="tech-tag">Drilling Efficiency</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Drilling Parameters → Ore Detection → Optimization → Real-time Adjustment → Efficiency → Monitoring</div>
+                            <div class="architecture-item">Drilling Operations → Sensor Data → Analysis → Optimization → Execution → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Drilling parameter data</li>
+                                <li>Ore quality sensors</li>
+                                <li>Geological data</li>
+                                <li>Equipment performance</li>
+                                <li>Environmental conditions</li>
+                                <li>Safety protocols</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Drilling Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Ore Recovery</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Operational Safety</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fleet Management Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🚛</div>
+                        <div>
+                            <div class="card-title">Fleet Management</div>
+                            <div class="card-subtitle">Vehicle Coordination</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize mining fleet operations including haul trucks, excavators, and support vehicles for maximum efficiency and safety.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Fleet Optimization</span>
+                            <span class="tech-tag">Vehicle Coordination</span>
+                            <span class="tech-tag">Route Planning</span>
+                            <span class="tech-tag">Load Optimization</span>
+                            <span class="tech-tag">Maintenance Scheduling</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Fleet Data → Route Optimization → Load Planning → Vehicle Coordination → Efficiency → Monitoring</div>
+                            <div class="architecture-item">Vehicle Tracking → Route Analysis → Optimization → Coordination → Execution → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Fleet tracking data</li>
+                                <li>Route information</li>
+                                <li>Load capacity data</li>
+                                <li>Fuel consumption</li>
+                                <li>Maintenance schedules</li>
+                                <li>Operational requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Fleet Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Fuel Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Vehicle Utilization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environmental Compliance Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🌍</div>
+                        <div>
+                            <div class="card-title">Environmental Compliance</div>
+                            <div class="card-subtitle">Sustainability Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Monitor and ensure environmental compliance across mining operations using real-time data analysis and automated reporting systems.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Environmental Monitoring</span>
+                            <span class="tech-tag">Compliance Management</span>
+                            <span class="tech-tag">Real-time Analysis</span>
+                            <span class="tech-tag">Sustainability Tracking</span>
+                            <span class="tech-tag">Regulatory Reporting</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Environmental Data → Compliance Analysis → Monitoring → Reporting → Optimization → Improvement</div>
+                            <div class="architecture-item">Monitoring Systems → Data Analysis → Compliance Check → Reporting → Action → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Environmental sensor data</li>
+                                <li>Compliance requirements</li>
+                                <li>Monitoring systems</li>
+                                <li>Regulatory standards</li>
+                                <li>Impact assessments</li>
+                                <li>Mitigation measures</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Environmental Impact</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">24/7</div>
+                                <div class="metric-label">Real-time Monitoring</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Predictive Maintenance Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔧</div>
+                        <div>
+                            <div class="card-title">Predictive Maintenance</div>
+                            <div class="card-subtitle">Equipment Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate equipment maintenance scheduling and monitoring across mining operations to prevent failures and optimize maintenance resources.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Predictive Maintenance</span>
+                            <span class="tech-tag">Equipment Monitoring</span>
+                            <span class="tech-tag">Maintenance Automation</span>
+                            <span class="tech-tag">Failure Prevention</span>
+                            <span class="tech-tag">Resource Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Equipment Data → Condition Monitoring → Maintenance Scheduling → Automation → Optimization → Reporting</div>
+                            <div class="architecture-item">Sensor Data → Analysis → Prediction → Scheduling → Execution → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Equipment sensor data</li>
+                                <li>Maintenance history</li>
+                                <li>Operating conditions</li>
+                                <li>Failure patterns</li>
+                                <li>Maintenance resources</li>
+                                <li>Operational schedules</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Equipment Uptime</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Maintenance Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Maintenance Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production Optimization Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🏭</div>
+                        <div>
+                            <div class="card-title">Production Optimization</div>
+                            <div class="card-subtitle">Mining Efficiency</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize mining production processes by analyzing extraction rates, processing efficiency, and resource utilization in real-time.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Production Optimization</span>
+                            <span class="tech-tag">Process Automation</span>
+                            <span class="tech-tag">Resource Management</span>
+                            <span class="tech-tag">Efficiency Monitoring</span>
+                            <span class="tech-tag">Real-time Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Production Data → Process Analysis → Optimization → Resource Allocation → Efficiency → Monitoring</div>
+                            <div class="architecture-item">Mining Operations → Data Analysis → Optimization → Execution → Monitoring → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Production rate data</li>
+                                <li>Processing efficiency</li>
+                                <li>Resource utilization</li>
+                                <li>Equipment performance</li>
+                                <li>Quality metrics</li>
+                                <li>Operational parameters</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Production Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Resource Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Cost Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logistics Coordination Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📦</div>
+                        <div>
+                            <div class="card-title">Logistics Coordination</div>
+                            <div class="card-subtitle">Supply Chain Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate logistics and supply chain coordination for mining operations including material transport, equipment delivery, and resource distribution.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Logistics Automation</span>
+                            <span class="tech-tag">Supply Chain Coordination</span>
+                            <span class="tech-tag">Material Transport</span>
+                            <span class="tech-tag">Resource Distribution</span>
+                            <span class="tech-tag">Delivery Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Logistics Data → Route Optimization → Coordination → Transport → Distribution → Monitoring</div>
+                            <div class="architecture-item">Supply Chain → Coordination → Optimization → Transport → Delivery → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Logistics tracking data</li>
+                                <li>Route information</li>
+                                <li>Delivery schedules</li>
+                                <li>Resource requirements</li>
+                                <li>Transport capacity</li>
+                                <li>Coordination protocols</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Logistics Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Delivery Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Supply Chain Optimization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of mining and resource extraction</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of environmental regulations, safety standards, and sustainable mining practices
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
